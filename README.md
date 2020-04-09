@@ -84,7 +84,7 @@ class Example {
 }
 ~~~
 
-##License
+## License
 
 MIT License
 
