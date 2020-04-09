@@ -22,7 +22,6 @@ class Sign {
           return [:]
       }
 
-      print("sorted : \(sortedString)")
       let signedMessage = signWithPrivateKey(message: sortedString)
       let signatureJson = createSignature(signature: signedMessage)
       let signedTx = createSignedTx(json: message, signature: signatureJson)
@@ -60,14 +59,9 @@ class Sign {
     }
   
     private func signWithPrivateKey(message:String) -> Data {
-      
-        print("message : \(message)")
-      
         guard let jsonData = message.data(using: .utf8) else { return Data() }
         let hashedMessage = Utils.sha256(data: jsonData)
       
-        print("hashed \(hashedMessage.bytes)")
-        
         var curve = secp256k1
         var signature = Data(repeating: 0, count: 64)
         signature.withUnsafeMutableBytes { (sig) in

@@ -11,9 +11,9 @@ import Foundation
 @objc public class TerraWalletSDK : NSObject {
     
     @objc static public let PRIVATE_KEY = "privateKey"
-    @objc static public let PUBLIC_KEY = "privateKey"
-    @objc static public let ADDRESS = "privateKey"
-    @objc static public let MENOMONIC = "privateKey"
+    @objc static public let PUBLIC_KEY = "publicKey"
+    @objc static public let ADDRESS = "address"
+    @objc static public let MNEMONIC = "mnemonic"
     
     //generate
     @objc static public func getNewWallet() -> Dictionary<String, String> {
@@ -24,7 +24,7 @@ import Foundation
         result[PRIVATE_KEY] = wallet.hexPrivateKey
         result[PUBLIC_KEY] = wallet.hexPublicKey
         result[ADDRESS] = wallet.terraAddress
-        result[MENOMONIC] = wallet.mnemonic
+        result[MNEMONIC] = wallet.mnemonic
         
         return result
     }
