@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TerraWalletSDK_Example' do
+  pod 'TerraWalletSDK', :path => '../'
+
+  target 'TerraWalletSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

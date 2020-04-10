@@ -1,29 +1,3 @@
-# terra-wallet-ios
-
-[![Version](https://img.shields.io/cocoapods/v/TerraWalletSDK.svg?style=flat)](https://cocoapods.org/pods/TerraWalletSDK)
-[![License](https://img.shields.io/cocoapods/l/TerraWalletSDK.svg?style=flat)](https://cocoapods.org/pods/TerraWalletSDK)
-[![Platform](https://img.shields.io/cocoapods/p/TerraWalletSDK.svg?style=flat)](https://cocoapods.org/pods/TerraWalletSDK)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
-## Installation
-
-TerraWalletSDK is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'TerraWalletSDK'
-```
-
-## Author
-
-
-## License
-
 MIT License
 
 Copyright (c) 2020 TerraFormLabs Inc.

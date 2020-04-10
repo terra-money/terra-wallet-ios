@@ -1,0 +1,23 @@
+PODS:
+  - TerraWalletSDK (0.0.1):
+    - TrezorCrypto (= 0.0.9)
+  - TrezorCrypto (0.0.9)
+
+DEPENDENCIES:
+  - TerraWalletSDK (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - TrezorCrypto
+
+EXTERNAL SOURCES:
+  TerraWalletSDK:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TerraWalletSDK: 39b697ffc617f753e412453c0c2f707df454a526
+  TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
+
+PODFILE CHECKSUM: 2fdac52a233abb710d48d7d6552f547ccbf55a7f
+
+COCOAPODS: 1.9.1
