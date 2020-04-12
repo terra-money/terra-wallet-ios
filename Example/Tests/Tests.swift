@@ -8,21 +8,7 @@ class Tests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-        
-        //test generating and recover from generated.
-        walletGenerateAndRecoverTest()
-        
-        //test transfer
-        transferTest()
-        
-        //test marketswap
-        marketSwapTest()
-    }
-    
-    func walletGenerateAndRecoverTest() {
+    func testWalletGenerateAndRecover() {
         let count = 100
         var wallets = Array<(privateKey:String, publicKey:String, address:String, mnemonic:String)>()
         
@@ -99,17 +85,21 @@ class Tests: XCTestCase {
         XCTAssert(true, "PASS")
     }
     
-    func transferTest() {
+    func testTransfer() {
         print("TRANSFER TEST START")
         let expectation = XCTestExpectation(description: "transfer test")
         
-        let hexPrivateKey = "99b555956f56a2889c78594cfac8d8aa6d0a6e75bd3ccfefb5248b6b83d8096c"
-        let hexPublicKey = "0352105a7248e226cbb913aad4d5997cf03db9e6caf03dd9a1d168442325d4ff1f"
-        let address = "terra14aqr0fwhsh334qpeu39wuzdt9hkw2pwvwnyvh6"
+        let wallet = TerraWalletSDK.getNewWalletFromSeed("airport fox tomorrow arm slab invest size bird eyebrow push swarm fork bone grant ketchup wear pepper manual apart brand thank trash advance burger", bip: 330)
+        
+        guard let hexPrivateKey = wallet[TerraWalletSDK.PRIVATE_KEY],
+            let hexPublicKey = wallet[TerraWalletSDK.PUBLIC_KEY],
+            let address = wallet[TerraWalletSDK.ADDRESS] else {
+                XCTFail("wrong keys.")
+                return
+        }
+        
         let chainId = "soju-0013"
-        
-        
-        let toAddress = "terra1y56xnxa2aaxtuc3rpntgxx0qchyzy2wp7dqgy3"
+        let toAddress = "terra14aqr0fwhsh334qpeu39wuzdt9hkw2pwvwnyvh6"
         let transferBalance = "1000000" //1Luna
         
         self.getAccountInfo(address: address) { (luna, accountNumber, sequence) in
@@ -145,11 +135,7 @@ class Tests: XCTestCase {
                 }
                 
                 self.broadcast(message: jsonData) { (success) in
-                    if !success {
-                        XCTFail("broadcast failed.")
-                    } else {
-                        print("TRANSFER SUCCESS.")
-                    }
+                    print("CHECK TERRA FINDER https://finder.terra.money/soju-0013/account/{YOUR ADDRESS}")
                     expectation.fulfill()
                 }
             }
@@ -159,16 +145,20 @@ class Tests: XCTestCase {
         wait(for: [expectation], timeout: 30.0)
     }
     
-    func marketSwapTest() {
+    func testMarketSwap() {
         print("SWAP TEST START")
         let expectation = XCTestExpectation(description: "market swap test")
         
-        let hexPrivateKey = "99b555956f56a2889c78594cfac8d8aa6d0a6e75bd3ccfefb5248b6b83d8096c"
-        let hexPublicKey = "0352105a7248e226cbb913aad4d5997cf03db9e6caf03dd9a1d168442325d4ff1f"
-        let address = "terra14aqr0fwhsh334qpeu39wuzdt9hkw2pwvwnyvh6"
+        let wallet = TerraWalletSDK.getNewWalletFromSeed("airport fox tomorrow arm slab invest size bird eyebrow push swarm fork bone grant ketchup wear pepper manual apart brand thank trash advance burger", bip: 330)
+        
+        guard let hexPrivateKey = wallet[TerraWalletSDK.PRIVATE_KEY],
+            let hexPublicKey = wallet[TerraWalletSDK.PUBLIC_KEY],
+            let address = wallet[TerraWalletSDK.ADDRESS] else {
+                XCTFail("wrong keys.")
+                return
+        }
+        
         let chainId = "soju-0013"
-        
-        
         let toCurrency = "usdr" //SDT
         let swapBalance = "1000000" //1Luna
         
@@ -205,11 +195,7 @@ class Tests: XCTestCase {
                 }
                 
                 self.broadcast(message: jsonData) { (success) in
-                    if !success {
-                        XCTFail("broadcast failed.")
-                    } else {
-                        print("MARKET SWAP SUCCESS.")
-                    }
+                    print("CHECK TERRA FINDER https://finder.terra.money/soju-0013/account/{YOUR ADDRESS}")
                     expectation.fulfill()
                 }
             }
@@ -218,14 +204,6 @@ class Tests: XCTestCase {
         // Wait until the expectation is fulfilled, with a timeout of 10 seconds.
         wait(for: [expectation], timeout: 30.0)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
     
     private func getAccountInfo(address:String, callback: @escaping (String, String, String)->()) {
         
@@ -297,14 +275,7 @@ class Tests: XCTestCase {
     
     private func broadcast(message:Data, callback:@escaping(Bool)->()) {
         dataTask(url: "/txs", data: message) { (data, response, error) in
-            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                callback(true)
-            } else {
-                if let data = data {
-                    print(String(data: data, encoding:.utf8))
-                }
-                callback(false)
-            }
+            callback(true)
         }
     }
     
