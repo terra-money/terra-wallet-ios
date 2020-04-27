@@ -14,17 +14,26 @@ class KeyPair {
         })
     }
   
-    public var publicKey: Data {
+    public var publicKey32: Data {
+        //prefix(1byte) + data(32bytes)
         guard let curve = node.curve.pointee.params else {
             return Data()
         }
         return Utils.ecdsa(data: privateKey, curve:curve)
     }
+    
+    public var publicKey64: Data {
+        //prefix(1byte) + data(64bytes)
+        guard let curve = node.curve.pointee.params else {
+            return Data()
+        }
+        return Utils.ecdsa64(data: privateKey, curve:curve)
+    }
   
     public var terraAddress: String {
 
         //sha256
-        let hashed = Utils.sha256(data: publicKey)
+        let hashed = Utils.sha256(data: publicKey32)
 
         //ripemd160
         let ripemd160Result = Utils.ripemd160Encode(data: hashed)

@@ -12,6 +12,7 @@ import Foundation
     
     @objc static public let PRIVATE_KEY = "privateKey"
     @objc static public let PUBLIC_KEY = "publicKey"
+    @objc static public let PUBLIC_KEY_UNCOMPRESSED = "publicKey64"
     @objc static public let ADDRESS = "address"
     @objc static public let MNEMONIC = "mnemonic"
     
@@ -23,6 +24,7 @@ import Foundation
         var result = Dictionary<String, String>()
         result[PRIVATE_KEY] = wallet.hexPrivateKey
         result[PUBLIC_KEY] = wallet.hexPublicKey
+        result[PUBLIC_KEY_UNCOMPRESSED] = wallet.hexPublicKey64
         result[ADDRESS] = wallet.terraAddress
         result[MNEMONIC] = wallet.mnemonic
         
@@ -37,6 +39,7 @@ import Foundation
         var result = Dictionary<String, String>()
         result[PRIVATE_KEY] = wallet.hexPrivateKey
         result[PUBLIC_KEY] = wallet.hexPublicKey
+        result[PUBLIC_KEY_UNCOMPRESSED] = wallet.hexPublicKey64
         result[ADDRESS] = wallet.terraAddress
         
         return result

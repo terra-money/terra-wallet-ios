@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02988AA1244D396B000FE999 /* Pods_TerraWalletSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D229CD55DFCEDA2F317489DA /* Pods_TerraWalletSDK_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -14,7 +15,6 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		AABE4B19638D95204D186903 /* Pods_TerraWalletSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D5310758044817FF9D000A /* Pods_TerraWalletSDK_Tests.framework */; };
-		C3520AC1551DA32D27405D34 /* Pods_TerraWalletSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D229CD55DFCEDA2F317489DA /* Pods_TerraWalletSDK_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3520AC1551DA32D27405D34 /* Pods_TerraWalletSDK_Example.framework in Frameworks */,
+				02988AA1244D396B000FE999 /* Pods_TerraWalletSDK_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,10 +212,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 9JSE7J4PEP;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 9JSE7J4PEP;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -480,6 +482,7 @@
 			baseConfigurationReference = 88DB41A5805E733E9BBCFA81 /* Pods-TerraWalletSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9JSE7J4PEP;
 				INFOPLIST_FILE = TerraWalletSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -496,6 +499,7 @@
 			baseConfigurationReference = DEAF3A539AB9A2D2FC67A45A /* Pods-TerraWalletSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9JSE7J4PEP;
 				INFOPLIST_FILE = TerraWalletSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -511,6 +515,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB35D1CC012EA601716B6DE7 /* Pods-TerraWalletSDK_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 9JSE7J4PEP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -533,6 +538,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 93896756482434BC9AFEBDDF /* Pods-TerraWalletSDK_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 9JSE7J4PEP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

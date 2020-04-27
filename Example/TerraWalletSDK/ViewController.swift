@@ -24,8 +24,10 @@ class ViewController: UIViewController {
         print("- hexPrivateKey : \(wallet[TerraWalletSDK.PRIVATE_KEY])")
         // ex) 99b555956f56a2889c78594cfac8d8aa6d0a6e75bd3ccfefb5248b6b83d8096c, 32bytes
         
-        print("- hexPrivateKey : \(wallet[TerraWalletSDK.PUBLIC_KEY])")
+        print("- hexPublicKey : \(wallet[TerraWalletSDK.PUBLIC_KEY])")
         // ex) 0352105a7248e226cbb913aad4d5997cf03db9e6caf03dd9a1d168442325d4ff1f, 33bytes
+        print("- hexPublicKey(uncompressed) : \(wallet[TerraWalletSDK.PUBLIC_KEY_UNCOMPRESSED])")
+        // ex)
         
         print("- terraAddress : \(wallet[TerraWalletSDK.ADDRESS])")
         // ex) terra14aqr0fwhsh334qpeu39wuzdt9hkw2pwvwnyvh6
@@ -47,9 +49,11 @@ class ViewController: UIViewController {
         // ex) 99b555956f56a2889c78594cfac8d8aa6d0a6e75bd3ccfefb5248b6b83d8096c, 32bytes
         // if mnemonic is wrong, Return value will be ""
         
-        print("- hexPrivateKey : \(wallet[TerraWalletSDK.PUBLIC_KEY])")
+        print("- hexPublicKey : \(wallet[TerraWalletSDK.PUBLIC_KEY])")
         // ex) 0352105a7248e226cbb913aad4d5997cf03db9e6caf03dd9a1d168442325d4ff1f, 33bytes
         // if mnemonic is wrong, Return value will be ""
+        print("- hexPublicKey(uncompressed) : \(wallet[TerraWalletSDK.PUBLIC_KEY_UNCOMPRESSED])")
+        // ex)
         
         print("- terraAddress : \(wallet[TerraWalletSDK.ADDRESS])")
         // ex) terra14aqr0fwhsh334qpeu39wuzdt9hkw2pwvwnyvh6

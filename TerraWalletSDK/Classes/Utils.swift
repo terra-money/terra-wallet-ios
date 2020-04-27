@@ -33,7 +33,7 @@ extension String {
 
 class Utils {
   
-    static func generate(mnemonic:String = generateMnemonic(), bip:Int = 330) -> (hexPrivateKey:String, hexPublicKey:String, terraAddress:String, mnemonic:String) {
+    static func generate(mnemonic:String = generateMnemonic(), bip:Int = 330) -> (hexPrivateKey:String, hexPublicKey:String, hexPublicKey64:String, terraAddress:String, mnemonic:String) {
         if mnemonic_check(mnemonic) != 0 {
             let path = "m/44'/\(bip)'/0'/0/index"
             let index = 0
@@ -44,11 +44,11 @@ class Utils {
             }
             
             if let keyPair = KeyDerivation.getKeyPair(seed: seed, path: path, index: index) {
-                return (keyPair.privateKey.hex, keyPair.publicKey.hex, keyPair.terraAddress, mnemonic)
+                return (keyPair.privateKey.hex, keyPair.publicKey32.hex, keyPair.publicKey64.hex, keyPair.terraAddress, mnemonic)
             }
         }
       
-        return ("","","","")
+        return ("","","","","")
     }
     
     private static func generateMnemonic() -> String {
@@ -64,6 +64,17 @@ class Utils {
         data.withUnsafeBytes { ptr in
             hashed.withUnsafeMutableBytes { keyPtr in
               ecdsa_get_public_key33(curve, ptr, keyPtr)
+            }
+        }
+
+        return hashed
+    }
+    
+    static func ecdsa64(data:Data, curve:UnsafePointer<ecdsa_curve>) -> Data {
+        var hashed = Data(repeating: 0, count: 65)
+        data.withUnsafeBytes { ptr in
+            hashed.withUnsafeMutableBytes { keyPtr in
+              ecdsa_get_public_key65(curve, ptr, keyPtr)
             }
         }
 
