@@ -54,7 +54,7 @@ class Sign {
   
     private func jsonSort(signMessage:Dictionary<String, Any>) -> String? {
       guard let sorted = try? JSONSerialization.data(withJSONObject: signMessage, options: .sortedKeys),
-        let sortedString = String(data: sorted, encoding: .utf8)?.replacingOccurrences(of: "\\", with: "") else {
+        let sortedString = String(data: sorted, encoding: .utf8)?.replacingOccurrences(of: "\\/", with: "") else {
           return nil
       }
       
