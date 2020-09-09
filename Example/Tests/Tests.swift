@@ -149,7 +149,7 @@ class Tests: XCTestCase {
         print("SWAP TEST START")
         let expectation = XCTestExpectation(description: "market swap test")
         
-        let wallet = TerraWalletSDK.getNewWalletFromSeed("airport fox tomorrow arm slab invest size bird eyebrow push swarm fork bone grant ketchup wear pepper manual apart brand thank trash advance burger", bip: 330)
+        let wallet = TerraWalletSDK.getNewWalletFromSeed("police head unfair frozen animal sketch peace budget orange foot fault quantum caution make reject fruit minimum east stuff leisure seminar ocean credit ridge", bip: 330)
         
         guard let hexPrivateKey = wallet[TerraWalletSDK.PRIVATE_KEY],
             let hexPublicKey = wallet[TerraWalletSDK.PUBLIC_KEY],
@@ -158,17 +158,17 @@ class Tests: XCTestCase {
                 return
         }
         
-        let chainId = "soju-0013"
-        let toCurrency = "usdr" //SDT
-        let swapBalance = "1000000" //1Luna
+        let chainId = "mars-1"
+        let toCurrency = "uusd" //SDT
+        let swapBalance = "1610594121" //1Luna
         
         self.getAccountInfo(address: address) { (luna, accountNumber, sequence) in
-            if let lunaValue = Int(luna), lunaValue > 1000 {
-                
-            } else {
-                XCTFail("not enough luna balance.")
-                return
-            }
+//            if let lunaValue = Int(luna), lunaValue > 1000 {
+//
+//            } else {
+//                XCTFail("not enough luna balance.")
+//                return
+//            }
             
             if accountNumber == "" {
                 XCTFail("account number is not valid")
@@ -180,25 +180,37 @@ class Tests: XCTestCase {
                 return
             }
             
+//            for i in 0..<381 {
+                self.makeMarketSwapMessage(from: address, toCurrency: toCurrency, accountNumber: "16", chainId: chainId, sequence: "17", swapBalance: swapBalance) { message in
+                                
+                                if message.isEmpty {
+                                    XCTFail("makeMarketSwapMessage is wrong.")
+                                }
+                                
+                                let json = "{\"msg\":[{\"type\":\"market/MsgSwap\",\"value\":{\"trader\":\"terra14aqr0fwhsh334qpeu39wuzdt9hkw2pwvwnyvh6\",\"ask_denom\":\"uusd\",\"offer_coin\":{\"amount\":\"4121\",\"denom\":\"uvixy\"}}}],\"fee\":{\"amount\":[{\"amount\":\"3000\",\"denom\":\"uusd\"}],\"gas\":\"200000\"},\"memo\":\"Sent via terra-wallet-java test\",\"signatures\":null}"
+                                let data = json.data(using: .utf8)!
+                    
+                                let m = try! JSONSerialization.jsonObject(with: data, options: .init()) as! [String:Any]
+                    
+                    
+                                let signed = TerraWalletSDK.sign(m, sequence: "17", account_number: "16", chain_id: chainId, hexPrivateKey: hexPrivateKey, hexPublicKey: hexPublicKey)
+                                
+                                guard let jsonData = try? JSONSerialization.data(withJSONObject: signed, options: []) else {
+                                    XCTFail("signed message is wrong.")
+                                    return
+                                }
+                                let sig = (((signed["tx"] as! [String:Any])["signatures"] as! Array<Any>)[0] as! [String:Any])["signature"] as! String
+                                print("signed : \(Array(jsonData))")
+                                print("signed : \(String(data: jsonData, encoding: .utf8)!)")
+                                print("signed : \(sig)")
+                                
+                //                self.broadcast(message: jsonData) { (success) in
+                //                    print("CHECK TERRA FINDER https://finder.terra.money/soju-0013/account/{YOUR ADDRESS}")
+                //                    expectation.fulfill()
+                //                }
+                            }
+//            }
             
-            self.makeMarketSwapMessage(from: address, toCurrency: toCurrency, accountNumber: accountNumber, chainId: chainId, sequence: sequence, swapBalance: swapBalance) { message in
-                
-                if message.isEmpty {
-                    XCTFail("makeMarketSwapMessage is wrong.")
-                }
-                
-                let signed = TerraWalletSDK.sign(message, sequence: sequence, account_number: accountNumber, chain_id: chainId, hexPrivateKey: hexPrivateKey, hexPublicKey: hexPublicKey)
-                
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: signed, options: []) else {
-                    XCTFail("signed message is wrong.")
-                    return
-                }
-                
-                self.broadcast(message: jsonData) { (success) in
-                    print("CHECK TERRA FINDER https://finder.terra.money/soju-0013/account/{YOUR ADDRESS}")
-                    expectation.fulfill()
-                }
-            }
         }
         
         // Wait until the expectation is fulfilled, with a timeout of 10 seconds.
@@ -256,7 +268,7 @@ class Tests: XCTestCase {
     
     private func makeMarketSwapMessage(from:String, toCurrency:String, accountNumber:String, chainId:String, sequence:String, swapBalance:String, callback: @escaping ([String:Any])->()) {
         
-        let requestJson = "{\"base_req\": {\"from\": \"\(from)\",\"memo\": \"Sent via terra-wallet-ios xctest\",\"chain_id\": \"\(chainId)\",\"account_number\": \"\(accountNumber)\",\"sequence\": \"\(sequence)\",\"gas\": \"200000\",\"gas_adjustment\": \"1.2\",\"fees\": [{\"denom\": \"uluna\",\"amount\": \"50\"}],\"simulate\": false},\"offer_coin\": {\"denom\": \"uluna\",\"amount\": \"\(swapBalance)\"},\"ask_denom\": \"\(toCurrency)\"}"
+        let requestJson = "{\"base_req\": {\"from\": \"\(from)\",\"memo\": \"Sent via terra-wallet-java test\",\"chain_id\": \"\(chainId)\",\"account_number\": \"\(accountNumber)\",\"sequence\": \"\(sequence)\",\"gas\": \"200000\",\"gas_adjustment\": \"1.2\",\"fees\": [{\"denom\": \"uusd\",\"amount\": \"3000\"}],\"simulate\": false},\"offer_coin\": {\"denom\": \"uvixy\",\"amount\": \"\(swapBalance)\"},\"ask_denom\": \"\(toCurrency)\"}"
         
         
         dataTask(url: "/market/swap", data: requestJson.data(using: .utf8)) { (data, response, error) in
@@ -280,7 +292,7 @@ class Tests: XCTestCase {
     }
     
     private func dataTask(url:String, httpMethod:String = "POST", data:Data? = nil, callback:@escaping (Data?, URLResponse?, Error?)->()) {
-        let url = URL(string: "https://soju-lcd.terra.dev\(url)")!
+        let url = URL(string: "http://mars:3060\(url)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod

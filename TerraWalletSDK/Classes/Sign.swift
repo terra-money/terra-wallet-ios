@@ -24,6 +24,7 @@ class Sign {
       guard let sortedString = jsonSort(signMessage: signMessage) else {
           return [:]
       }
+        print("sorted \(sortedString)")
 
       let signedMessage = signWithPrivateKey(message: sortedString)
       let signatureJson = createSignature(signature: signedMessage)

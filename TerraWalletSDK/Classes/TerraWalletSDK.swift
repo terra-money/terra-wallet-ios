@@ -61,4 +61,8 @@ import Foundation
       
         return body
     }
+    
+    @objc static public func isValidAddress(_ address:String) -> Bool {
+        return Utils.isValidAddress(address: address);
+    }
 }
